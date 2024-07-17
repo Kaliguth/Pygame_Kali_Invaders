@@ -38,14 +38,17 @@ class Game:
         self.countdown = 3  # Variable for countdown before game starts
 
         # Enemy speed based on difficulty
-        if difficulty == "easy":
-            self.__difficulty = 1
-        elif difficulty == "medium":
-            self.__difficulty = 3
-        elif difficulty == "hard":
-            self.__difficulty = 6
+        # The difficulty text variable is used for restarting the game in the same difficulty
+        # The enemy speed variable determines enemies' speed to pass over to the enemy lines object
+        self.__difficulty_text = difficulty
+        if self.__difficulty_text == "easy":
+            self.__enemy_speed = 1
+        elif self.__difficulty_text == "medium":
+            self.__enemy_speed = 3
+        elif self.__difficulty_text == "hard":
+            self.__enemy_speed = 6
         else:
-            self.__difficulty = 1
+            self.__enemy_speed = 1
 
         # Enemies list, enemy lines and player Objects
         self.__enemies = []  # Enemies list for enemy lines
@@ -53,7 +56,7 @@ class Game:
         self.__player = (
             Player(WIDTH / 2, HEIGHT + 80, 99, 75,
                    self.__spaceship_type, self.__spaceship_color))  # Game's player object with chosen color and type
-        self.__enemy_lines = EnemyLines(self.__enemies, self.__player, self.__difficulty)  # Game's enemy lines object
+        self.__enemy_lines = EnemyLines(self.__enemies, self.__player, self.__enemy_speed)  # Game's enemy lines object
 
         # Score and health bar parameters
         self.__life_icon = pygame.image.load('player/effects/life.png')
@@ -204,7 +207,7 @@ class Game:
         elif action == "restart":
             self.game_bgm.stop()  # Stop the current game music
             # Restart the game
-            self.__init__(self.screen, self.__spaceship_color, self.__spaceship_type, self.__difficulty)
+            self.__init__(self.screen, self.__spaceship_color, self.__spaceship_type, self.__difficulty_text)
         # If Quit button clicked - change the game running boolean to quit the game
         elif action == "quit":
             self.game_bgm.stop()  # Stop the game music

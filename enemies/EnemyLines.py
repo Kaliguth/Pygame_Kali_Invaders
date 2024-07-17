@@ -13,7 +13,7 @@ from util.Globals import WIDTH, HEIGHT
 
 
 class EnemyLines:
-    def __init__(self, enemies, player, difficulty):
+    def __init__(self, enemies, player, enemy_speed):
         # Enemy lines logic object to use methods
         self.enemy_lines_logic = EnemyLinesLogic(self)
         # Enemy list object
@@ -21,7 +21,7 @@ class EnemyLines:
         # Player object
         self.player = player
         # Enemy speed variable (based on difficulty)
-        self.enemy_speed = difficulty
+        self.enemy_speed = enemy_speed
         # Current x y positions variables (used for movements and drawing enemies in the right positions):
         # Current x position of enemy lines' beginning (leftmost side)
         self.start_x = WIDTH / 2 - 546
